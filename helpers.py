@@ -44,10 +44,13 @@ def get_eight_neighbors(x, y, GRID_SIZE):
                     if 0 <= xn < GRID_SIZE and 0 <= yn < GRID_SIZE} - {(x, y)}
 
 def print_from_set(in_set):
-    print()
-    width, heigth = (max(in_set, key=lambda coord:coord[pos])[pos] + 1 for pos in (0, 1))
+    smallest_x, smallest_y = (min(in_set, key=lambda coord:coord[pos])[pos] for pos in (0, 1))
+    width, heigth = (max(in_set, key=lambda coord:coord[pos])[pos] + 1 - min(in_set, key=lambda coord:coord[pos])[pos] for pos in (0, 1)) 
     plot_area = [width * [' '] for _ in range(heigth)]
-    for x,y in in_set:
+    # normalize coordinates
+    positive_set = {(x+abs(smallest_x), y+abs(smallest_y)) for x, y in in_set}
+    for x,y in positive_set:
         plot_area[y][x] = '#'
     for row in plot_area:
         print(''.join(c for c in row))
+    print(len(positive_set))
