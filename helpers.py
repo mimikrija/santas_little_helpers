@@ -12,7 +12,7 @@ def get_input(file_name, numbers=False, separator='\n'):
 
 def print_solutions(part_1, part_2 = None):
     print(f'Part 1 solution is: {part_1}')
-    if part_2:
+    if part_2 is not None:
         print(f'Part 2 solution is: {part_2}')
 
 def add_wrap(num_1, num_2, limit, start=0):
