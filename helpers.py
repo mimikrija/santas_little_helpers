@@ -1,3 +1,24 @@
+from os import path as ospath
+from requests import get as reqget
+
+
+def download_input_file(year, day, input_path='inputs/'):
+    url = f"https://adventofcode.com/{year}/day/{day}/input"
+    cookies = {"session": 'MAJA_COOKIE'}
+    input_path = f"{input_path}{str(day).zfill(2)}.txt"
+    if not ospath.isfile(input_path):
+        with open(input_path, 'w') as infile:
+            print(input_path, url)
+            infile.write(reqget(url, cookies=cookies).text[:-1])
+    return input_path
+
+def get_year():
+    """ Gets Advent of Code event year from the path in a very sophisticated manner. """
+    abs_path = ospath.abspath(__file__)
+    pos = abs_path.find("AdventOfCode") + len("AdventOfCode")
+    return abs_path[pos:pos+4]
+
+
 def get_input(file_name, numbers=False, separator='\n'):
     """ Reads in data present in `file_name` separated by `separator` string. """
     with open(file_name) as input_file:
