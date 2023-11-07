@@ -18,6 +18,9 @@ def get_year():
     pos = abs_path.find("AdventOfCode") + len("AdventOfCode")
     return abs_path[pos:pos+4]
 
+def read_input(day, numbers=False, separator='\n'):
+    """ A wrapper for `get_input` so that we can only provide day, instead of input file path"""
+    return get_input(download_input_file(get_year(), day), numbers=numbers, separator=separator)
 
 def get_input(file_name, numbers=False, separator='\n'):
     """ Reads in data present in `file_name` separated by `separator` string. """
