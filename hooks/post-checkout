@@ -1,0 +1,6 @@
+#!/bin/zsh
+# only do this if checking out a branch
+if [[ $3 = 1 ]]; then
+    branch=`git rev-parse --abbrev-ref HEAD`
+    python3 python/santas_little_helpers/hooks/day_template.py $branch
+fi
