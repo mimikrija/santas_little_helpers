@@ -1,10 +1,11 @@
 from os import path as ospath
+from os import getenv
 from requests import get as reqget
 
 
 def download_input_file(year, day, input_path='inputs/'):
     url = f"https://adventofcode.com/{year}/day/{day}/input"
-    cookies = {"session": 'MAJA_COOKIE'}
+    cookies = {"session": getenv("MAJA_AOC_COOKIE")}
     input_path = f"{input_path}{str(day).zfill(2)}.txt"
     if not ospath.isfile(input_path):
         with open(input_path, 'w') as infile:
